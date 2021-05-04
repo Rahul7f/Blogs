@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddNotesActivity"
+    android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <GridView
+                android:id="@+id/gridlayout"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:columnWidth="90dp"
+                android:numColumns="auto_fit"
+                android:verticalSpacing="10dp"
+                android:horizontalSpacing="10dp"
+                android:nestedScrollingEnabled="true"
+                android:gravity="center"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="top"
+                android:background="@drawable/ovel"
+                android:layout_margin="25dp"
+                android:hint="Notes Heading"
+                android:paddingLeft="20sp"
+                android:paddingTop="10dp"/>
+            <EditText
+                android:id="@+id/edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:inputType="text|textMultiLine"
+                android:gravity="top"
+                android:background="@drawable/ovel"
+                android:layout_margin="25dp"
+                android:hint="Notes description"
+                android:paddingLeft="20sp"
+                android:nestedScrollingEnabled="true"
+                android:paddingTop="10dp"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="25dp"
+                android:background="@drawable/ovel"
+                android:text="Save"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+</LinearLayout>

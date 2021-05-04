@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Blogs">
-        <activity android:name=".MainActivity">
+        <activity android:name=".AddNotesActivity"></activity>
+        <activity android:name=".ViewNotesActivity" />
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".Signup_Activity" />
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
