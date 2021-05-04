@@ -15,7 +15,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE Table UserDetails(Name TEXT ,Mobile TEXT, Email TEXT primary key, Password TEXT)");
+        db.execSQL("CREATE Table UserDetails(Name TEXT ,Mobile TEXT NOT NULL UNIQUE, Email TEXT primary key, Password TEXT)");
 
     }
 
@@ -29,6 +29,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public  Boolean insertuserdata(String name, String mobile,String email,String password){
         SQLiteDatabase DB = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+        contentValues.put("Name", name);
         contentValues.put("Mobile", mobile);
         contentValues.put("Email", email);
         contentValues.put("Password", password);
@@ -43,11 +44,42 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public Cursor getdata(){
-        SQLiteDatabase DB = this.getWritableDatabase();
+        SQLiteDatabase DB = this.getReadableDatabase();
        Cursor contentValues = DB.rawQuery("Select * from UserDetails",null);
 
         return contentValues;
     }
+
+
+    public Boolean loginforphone(String phone, String password){
+        SQLiteDatabase DB = this.getReadableDatabase();
+        Cursor cursor = DB.rawQuery("Select * from UserDetails WHERE Mobile = ? and Password = ?",new String[]{phone,password});
+        if (cursor.getCount()>0)
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
+
+
+    }
+
+    public Boolean loginforemail(String email, String password){
+        SQLiteDatabase DB = this.getReadableDatabase();
+        Cursor cursor = DB.rawQuery("Select * from UserDetails WHERE Email = ? and Password = ?",new String[]{email,password});
+        if (cursor.getCount()>0)
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
+
+
+    }
+
+
 
 
 }

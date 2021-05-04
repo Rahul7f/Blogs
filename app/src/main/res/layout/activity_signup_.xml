@@ -11,12 +11,14 @@
     android:orientation="vertical">
 
     <EditText
+        android:id="@+id/name_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Name"
         android:layout_marginTop="25dp"
         />
     <EditText
+        android:id="@+id/phone_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Mobile"
@@ -24,6 +26,7 @@
         />
 
     <EditText
+        android:id="@+id/email_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Email"
@@ -31,6 +34,7 @@
         />
 
     <EditText
+        android:id="@+id/password_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Password"
