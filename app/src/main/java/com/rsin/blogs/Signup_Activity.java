@@ -30,6 +30,7 @@ public class Signup_Activity extends AppCompatActivity {
         password_et = findViewById(R.id.password_et);
         dbHelper = new DBHelper(getApplicationContext());
 
+
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

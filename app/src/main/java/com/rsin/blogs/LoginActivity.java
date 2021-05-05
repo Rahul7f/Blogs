@@ -3,6 +3,7 @@ package com.rsin.blogs;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +18,7 @@ public class LoginActivity extends AppCompatActivity {
     Button login_btn;
     EditText email_et,password_et;
     DBHelper dbHelper;
+    SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         email_et = findViewById(R.id.login_email);
         password_et = findViewById(R.id.login_password);
         dbHelper = new DBHelper(getApplicationContext());
+        pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
 
 
         register.setOnClickListener(new View.OnClickListener() {
@@ -35,6 +38,19 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(LoginActivity.this,Signup_Activity.class));
             }
         });
+        String emailpref=pref.getString("email", null);
+        String passwordpref=pref.getString("password", null);
+        if (emailpref==null&&passwordpref==null)
+        {
+            Toast.makeText(this, "login please", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, HomeActivity.class);// New activity
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+        }
 
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,8 +69,19 @@ public class LoginActivity extends AppCompatActivity {
                         Boolean cursor = dbHelper.loginforphone(email,hash_password);
                         if (cursor == true)
                         {
+                            //shared preference
+
+                            SharedPreferences.Editor editor = pref.edit();
+                            editor.putString("phone",email );
+                            editor.putString("password", password);
+                            editor.apply();
+                            // shared preference end
+
                             Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(LoginActivity.this,HomeActivity.class));
+                            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);// New activity
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                            finish();
                         }
                         else {
                             Toast.makeText(LoginActivity.this, "check your Phone and Password", Toast.LENGTH_SHORT).show();
@@ -68,6 +95,12 @@ public class LoginActivity extends AppCompatActivity {
                         Boolean cursor = dbHelper.loginforemail(email,hash_password);
                         if (cursor == true)
                         {
+
+                            SharedPreferences.Editor editor = pref.edit();
+                            editor.putString("phone",email );
+                            editor.putString("password", password);
+                            editor.apply();
+
                             Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(LoginActivity.this,HomeActivity.class));
                             finish();

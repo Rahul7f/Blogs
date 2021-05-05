@@ -17,15 +17,25 @@
             <GridView
                 android:id="@+id/gridlayout"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="wrap_content"
                 android:columnWidth="90dp"
                 android:numColumns="auto_fit"
                 android:verticalSpacing="10dp"
                 android:horizontalSpacing="10dp"
                 android:nestedScrollingEnabled="true"
+                android:scrollbars="horizontal"
                 android:gravity="center"
                 />
+
+            <Button
+                android:id="@+id/add_images"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Add images"
+                android:layout_marginTop="25dp"/>
             <EditText
+                android:id="@+id/notes_title_et"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="top"
@@ -33,9 +43,14 @@
                 android:layout_margin="25dp"
                 android:hint="Notes Heading"
                 android:paddingLeft="20sp"
-                android:paddingTop="10dp"/>
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"
+                android:maxLength="100"
+                android:maxLines="1"
+
+                />
             <EditText
-                android:id="@+id/edit_text"
+                android:id="@+id/note_dis_et"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:inputType="text|textMultiLine"
@@ -45,9 +60,13 @@
                 android:hint="Notes description"
                 android:paddingLeft="20sp"
                 android:nestedScrollingEnabled="true"
-                android:paddingTop="10dp"/>
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"
+                android:maxLength="1000"
+                />
 
             <Button
+                android:id="@+id/save_notes_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="25dp"

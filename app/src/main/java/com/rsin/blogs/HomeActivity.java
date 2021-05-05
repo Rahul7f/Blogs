@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,6 +12,9 @@ import android.view.MenuItem;
 public class HomeActivity extends AppCompatActivity {
     RecyclerView notes_Recycleview;
     NotesAdapter notesAdapter;
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +24,8 @@ public class HomeActivity extends AppCompatActivity {
 
         notes_Recycleview = findViewById(R.id.notes_recycleview);
         notes_Recycleview.setAdapter(notesAdapter);
+        pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        editor= pref.edit();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -33,6 +39,15 @@ public class HomeActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.addnotes:
                 startActivity(new Intent(getApplicationContext(),AddNotesActivity.class));
+                return true;
+            case R.id.logout:
+                //cdc
+                editor.clear();
+                editor.apply();
+                Intent intent = new Intent(this, LoginActivity.class);// New activity
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
                 return true;
 
             default:

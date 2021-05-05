@@ -7,5 +7,10 @@
         app:showAsAction="ifRoom"
         android:title="Add">
     </item>
+    <item
+        android:id="@+id/logout"
+        app:showAsAction="ifRoom"
+        android:title="Logout">
+    </item>
 
 </menu>
