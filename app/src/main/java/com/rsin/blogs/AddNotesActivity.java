@@ -87,8 +87,9 @@ public class AddNotesActivity extends AppCompatActivity {
                         else {
                             //save data here
                             String uniqueID = UUID.randomUUID().toString();
+                            byte[] mainimg = getBytesFromBitmap(imagesEncodedList.get(0));
 
-                            boolean data =  dbHelper.addNotes(uniqueID,title,description);
+                            boolean data =  dbHelper.addNotes(uniqueID,title,description,mainimg);
 
                             if (data == true)
                             {

@@ -6,9 +6,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
     public DBHelper( Context context) {
@@ -19,7 +24,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE Table UserDetails(Name TEXT ,Mobile TEXT NOT NULL UNIQUE, Email TEXT primary key, Password TEXT)");
 
-        db.execSQL("CREATE Table AllNotes(NoteID TEXT primary key,Title TEXT, Description TEXT)");
+        db.execSQL("CREATE Table AllNotes(NoteID TEXT primary key,Title TEXT, Description TEXT,Image BLOB)");
 
         db.execSQL("CREATE Table Note_Images(NoteID TEXT, Image_no INTEGER, Image BLOB)");
 
@@ -87,13 +92,14 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     // table NOTES
-    public boolean addNotes( String note_id,String title,String description)
+    public boolean addNotes( String note_id,String title,String description,byte[] image)
     {
         SQLiteDatabase DB = this.getWritableDatabase();
         ContentValues cv = new  ContentValues();
         cv.put("NoteID", note_id);
         cv.put("Title", title);
         cv.put("Description", description);
+        cv.put("Image", image);
         long result = DB.insert( "AllNotes", null, cv );
 
         if (result == -1)
@@ -126,6 +132,39 @@ public class DBHelper extends SQLiteOpenHelper {
     }
     //TABLE NOTES_IMAGES END
 
+    public Cursor getallnotes(){
+        SQLiteDatabase DB = this.getReadableDatabase();
+        Cursor cursor = DB.rawQuery("Select * from AllNotes",null);
+        return cursor;
+    }
+
+
+    public List<Bitmap> getImagebyID(String i){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select * from Note_Images where NoteID = \""+i+"\"",null);
+        List<Bitmap> allimg = new ArrayList<Bitmap>();
+
+        if (cursor.getCount()==0)
+        {
+            return null;
+
+        }
+        else {
+            while (cursor.moveToNext())
+            {
+                byte[] imgByte = cursor.getBlob(cursor.getColumnIndex("Image"));
+                Bitmap img_bitmap = getImagebitmap(imgByte);
+                allimg.add(img_bitmap);
+            }
+
+            return  allimg;
+        }
+
+    }
+
+    public static Bitmap getImagebitmap(byte[] image) {
+        return BitmapFactory.decodeByteArray(image, 0, image.length);
+    }
 
 
 

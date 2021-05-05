@@ -12,13 +12,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <ImageView
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/image_recycleview"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:src="@drawable/sampleimg"
-                android:scaleType="centerCrop"/>
+                 />
 
             <TextView
+                android:id="@+id/title_tt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="What is Lorem Ipsum?(Why do we use it)"
@@ -30,6 +31,7 @@
                 />
 
             <TextView
+                android:id="@+id/dec_tt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/sample_dis"
