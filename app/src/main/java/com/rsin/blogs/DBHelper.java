@@ -4,7 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -16,6 +18,11 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE Table UserDetails(Name TEXT ,Mobile TEXT NOT NULL UNIQUE, Email TEXT primary key, Password TEXT)");
+
+        db.execSQL("CREATE Table AllNotes(NoteID TEXT primary key,Title TEXT, Description TEXT)");
+
+        db.execSQL("CREATE Table Note_Images(NoteID TEXT, Image_no INTEGER, Image BLOB)");
+
 
     }
 
@@ -78,6 +85,46 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     }
+
+    // table NOTES
+    public boolean addNotes( String note_id,String title,String description)
+    {
+        SQLiteDatabase DB = this.getWritableDatabase();
+        ContentValues cv = new  ContentValues();
+        cv.put("NoteID", note_id);
+        cv.put("Title", title);
+        cv.put("Description", description);
+        long result = DB.insert( "AllNotes", null, cv );
+
+        if (result == -1)
+        {
+
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+    //table NOTES END
+
+    //TABLE NOTES_IMAGES
+    public boolean addImages( String note_id, int imgno, byte[] image)
+    {
+        SQLiteDatabase DB = this.getWritableDatabase();
+        ContentValues cv = new  ContentValues();
+        cv.put("NoteID", note_id);
+        cv.put("Image_no", imgno);
+        cv.put("Image", image);
+        long result = DB.insert( "Note_Images", null, cv );
+        if (result == -1)
+        {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+    //TABLE NOTES_IMAGES END
 
 
 

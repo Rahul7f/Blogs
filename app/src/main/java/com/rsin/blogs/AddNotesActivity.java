@@ -14,15 +14,18 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.InputFilter;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class AddNotesActivity extends AppCompatActivity {
     GridView gridLayout;
@@ -36,6 +39,7 @@ public class AddNotesActivity extends AppCompatActivity {
     private static final int STORAGE_PERMISSION_CODE = 101;
     Uri imageUri;
     String title,description;
+    DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +52,7 @@ public class AddNotesActivity extends AppCompatActivity {
         title_et = findViewById(R.id.notes_title_et);
         dis_et = findViewById(R.id.note_dis_et);
         imagesEncodedList = new ArrayList<Bitmap>();
-
+        dbHelper = new DBHelper(getApplicationContext());
 
         add_images.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,18 +75,47 @@ public class AddNotesActivity extends AppCompatActivity {
                     {
                         title_et.setError("text too small");
                     }
-                    else if (description.length()<100)
+                    else if (description.length()<5)
                     {
                         dis_et.setError("text too small");
                     }
                     else {
-                        if (imagesEncodedList.isEmpty())
+                        if (imagesEncodedList.isEmpty()&& imagesEncodedList.size()==0)
                         {
                             Toast.makeText(AddNotesActivity.this, "choose image", Toast.LENGTH_SHORT).show();
                         }
                         else {
                             //save data here
-                            Toast.makeText(AddNotesActivity.this, "data saved", Toast.LENGTH_SHORT).show();
+                            String uniqueID = UUID.randomUUID().toString();
+
+                            boolean data =  dbHelper.addNotes(uniqueID,title,description);
+
+                            if (data == true)
+                            {
+                                //data inserted
+                                Toast.makeText(AddNotesActivity.this, "text data inserted", Toast.LENGTH_SHORT).show();
+                                for (int i = 0; i<imagesEncodedList.size();i++)
+                                {
+
+                                    byte[] imgbyte = getBytesFromBitmap(imagesEncodedList.get(i));
+                                    boolean image_data =dbHelper.addImages(uniqueID,i+1,imgbyte);
+                                    if (image_data==true)
+                                    {
+                                        Toast.makeText(AddNotesActivity.this, String.valueOf(i+1)+" inserted", Toast.LENGTH_SHORT).show();
+                                    }
+                                    else {
+                                        Toast.makeText(AddNotesActivity.this, "image fail ", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                            }
+
+                            else {
+                                //something wrong
+                                Toast.makeText(AddNotesActivity.this, "data failed", Toast.LENGTH_SHORT).show();
+                            }
+
+
                         }
                     }
                 }
@@ -182,11 +215,11 @@ public class AddNotesActivity extends AppCompatActivity {
 
     }
 
-//    public byte[] getBytesFromBitmap(Bitmap bitmap) {
-//        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
-//        return stream.toByteArray();
-//    }
+    public byte[] getBytesFromBitmap(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+        return stream.toByteArray();
+    }
 
 
 

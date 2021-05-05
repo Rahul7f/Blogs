@@ -45,7 +45,7 @@
                 android:paddingLeft="20sp"
                 android:paddingTop="10dp"
                 android:paddingRight="10dp"
-                android:maxLength="100"
+                android:maxLength="10"
                 android:maxLines="1"
 
                 />
@@ -62,7 +62,7 @@
                 android:nestedScrollingEnabled="true"
                 android:paddingTop="10dp"
                 android:paddingRight="10dp"
-                android:maxLength="1000"
+                android:maxLength="10"
                 />
 
             <Button
