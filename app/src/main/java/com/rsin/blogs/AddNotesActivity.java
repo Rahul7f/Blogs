@@ -75,7 +75,7 @@ public class AddNotesActivity extends AppCompatActivity {
                     {
                         title_et.setError("text too small");
                     }
-                    else if (description.length()<5)
+                    else if (description.length()<100)
                     {
                         dis_et.setError("text too small");
                     }
@@ -102,7 +102,11 @@ public class AddNotesActivity extends AppCompatActivity {
                                     boolean image_data =dbHelper.addImages(uniqueID,i+1,imgbyte);
                                     if (image_data==true)
                                     {
-                                        Toast.makeText(AddNotesActivity.this, String.valueOf(i+1)+" inserted", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);// New activity
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(intent);
+                                        finish();
+
                                     }
                                     else {
                                         Toast.makeText(AddNotesActivity.this, "image fail ", Toast.LENGTH_SHORT).show();
