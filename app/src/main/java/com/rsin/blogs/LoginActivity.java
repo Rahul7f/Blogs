@@ -11,12 +11,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+
 import java.io.UnsupportedEncodingException;
 
 public class LoginActivity extends AppCompatActivity {
     TextView register;
     Button login_btn;
-    EditText email_et,password_et;
+    TextInputLayout email_et,password_et;
     DBHelper dbHelper;
     SharedPreferences pref;
 
@@ -55,11 +58,13 @@ public class LoginActivity extends AppCompatActivity {
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = email_et.getText().toString();
-                String password = password_et.getText().toString();
+                String email = email_et.getEditText().getText().toString();
+                String password = password_et.getEditText().getText().toString();
                 if (email.isEmpty() && password.isEmpty())
                 {
-                    Toast.makeText(LoginActivity.this, "enter email and password", Toast.LENGTH_SHORT).show();
+                    email_et.setError("Enter Email");
+                    password_et.setError("Enter password");
+
                 }
                 else {
                     String value = check_phone_email(email);
@@ -106,12 +111,15 @@ public class LoginActivity extends AppCompatActivity {
                             finish();
                         }
                         else {
-                            Toast.makeText(LoginActivity.this, "check your email and Password", Toast.LENGTH_SHORT).show();
+                            email_et.setError("Enter Correct Email");
+                            password_et.setError("Enter Correct Password");
+
                         }
 
                     }
                     else {
-                        Toast.makeText(LoginActivity.this, "invalid email/phone", Toast.LENGTH_SHORT).show();
+                        email_et.setError("invalid email/phone");
+
                     }
                 }
 

@@ -52,7 +52,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
                 intent.putExtra("Description",list.get(position).description);
                 intent.putExtra("notes_id",list.get(position).note_id);
                 context.startActivity(intent);
-                Toast.makeText(context, list.get(position).note_id, Toast.LENGTH_SHORT).show();
+
             }
         });
 

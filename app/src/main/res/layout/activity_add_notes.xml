@@ -17,7 +17,7 @@
             <GridView
                 android:id="@+id/gridlayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 android:columnWidth="90dp"
                 android:numColumns="auto_fit"
                 android:verticalSpacing="10dp"
@@ -34,36 +34,57 @@
                 android:layout_gravity="center"
                 android:text="Add images"
                 android:layout_marginTop="25dp"/>
-            <EditText
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/notes_title_et"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:gravity="top"
-                android:background="@drawable/ovel"
-                android:layout_margin="25dp"
-                android:hint="Notes Heading"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="Note Title"
                 android:paddingLeft="20sp"
                 android:paddingTop="10dp"
                 android:paddingRight="10dp"
-                android:maxLength="100"
-                android:maxLines="1"
+                app:counterEnabled="true"
+                app:counterMaxLength="100"
+                app:helperTextEnabled="true"
+                >
 
-                />
-            <EditText
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text|textMultiLine"
+                    android:maxLength="100"
+
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/note_dis_et"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:inputType="text|textMultiLine"
-                android:gravity="top"
-                android:background="@drawable/ovel"
-                android:layout_margin="25dp"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:hint="Notes description"
                 android:paddingLeft="20sp"
-                android:nestedScrollingEnabled="true"
                 android:paddingTop="10dp"
                 android:paddingRight="10dp"
-                android:maxLength="1000"
-                />
+                app:counterEnabled="true"
+                app:counterMaxLength="1000"
+                app:helperTextEnabled="true"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text|textMultiLine"
+                    android:maxLength="1000"
+
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <Button
                 android:id="@+id/save_notes_btn"

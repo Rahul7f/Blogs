@@ -5,47 +5,138 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Signup_Activity"
-    android:gravity="center"
-    android:layout_marginLeft="25dp"
-    android:layout_marginRight="25dp"
     android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/name_et"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Name"
-        android:layout_marginTop="25dp"
-        />
-    <EditText
-        android:id="@+id/phone_et"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Mobile"
-        android:layout_marginTop="25dp"
-        />
+        android:layout_height="match_parent"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp">
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/logo"/>
 
-    <EditText
-        android:id="@+id/email_et"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Email"
-        android:layout_marginTop="25dp"
-        />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/name_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_marginTop="25dp"
+                android:hint="Name">
 
-    <EditText
-        android:id="@+id/password_et"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Password"
-        android:layout_marginTop="25dp"
-        />
-    <Button
-        android:id="@+id/signup_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="sign up"
-        android:background="@drawable/ovel"/>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/phone_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_marginTop="25dp"
+                android:hint="Mobile">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/email_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_marginTop="25dp"
+                android:hint="Email">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/password_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_marginTop="25dp"
+                android:hint="Password"
+                app:counterEnabled="true"
+                app:counterMaxLength="15"
+                app:helperTextEnabled="true"
+                app:helperTextTextColor="#4CAF50"
+                app:endIconMode="password_toggle"
+                app:helperText="Password must include uppercase, lowercase, number,and symbols">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:maxLength="15"
+
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!--    <EditText-->
+            <!--        android:id="@+id/name_et"-->
+            <!--        android:layout_width="match_parent"-->
+            <!--        android:layout_height="wrap_content"-->
+            <!--        android:hint="Name"-->
+            <!--        android:layout_marginTop="25dp"-->
+            <!--        />-->
+            <!--    <EditText-->
+            <!--        android:id="@+id/phone_et"-->
+            <!--        android:layout_width="match_parent"-->
+            <!--        android:layout_height="wrap_content"-->
+            <!--        android:hint="Mobile"-->
+            <!--        android:layout_marginTop="25dp"-->
+            <!--        />-->
+
+            <!--    <EditText-->
+            <!--        android:id="@+id/email_et"-->
+            <!--        android:layout_width="match_parent"-->
+            <!--        android:layout_height="wrap_content"-->
+            <!--        android:hint="Email"-->
+            <!--        android:layout_marginTop="25dp"-->
+            <!--        />-->
+
+            <!--    <EditText-->
+            <!--        android:id="@+id/password_et"-->
+            <!--        android:layout_width="match_parent"-->
+            <!--        android:layout_height="wrap_content"-->
+            <!--        android:hint="Password"-->
+            <!--        android:layout_marginTop="25dp"-->
+            <!--        />-->
+            <Button
+                android:id="@+id/signup_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="sign up"
+                android:background="@drawable/ovel"/>
+
+
+        </LinearLayout>
+    </ScrollView>
+
 
 </LinearLayout>

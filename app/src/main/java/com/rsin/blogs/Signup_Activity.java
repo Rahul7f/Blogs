@@ -9,13 +9,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 import java.io.UnsupportedEncodingException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Signup_Activity extends AppCompatActivity {
     Button signup;
-    EditText name_et,phone_et,email_et,password_et;
+    TextInputLayout name_et,phone_et,email_et,password_et;
     String name,phone,email,password ,hashpassword ;
     DBHelper dbHelper;
 
@@ -34,15 +36,18 @@ public class Signup_Activity extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                name = name_et.getText().toString();
-                phone = phone_et.getText().toString();
-                email = email_et.getText().toString();
-                password = password_et.getText().toString();
+                name = name_et.getEditText().getText().toString();
+                phone = phone_et.getEditText().getText().toString();
+                email = email_et.getEditText().getText().toString();
+                password = password_et.getEditText().getText().toString();
 
 
                 if (name.isEmpty() && phone.isEmpty() && email.isEmpty() && password.isEmpty())
                 {
-                    Toast.makeText(Signup_Activity.this, "Enter all field", Toast.LENGTH_SHORT).show();
+                    name_et.setError("Enter Name");
+                    phone_et.setError("Enter Phone");
+                    email_et.setError("Enter Email");
+                    password_et.setError("Enter Password");
 
                 }
                 else {
@@ -50,19 +55,23 @@ public class Signup_Activity extends AppCompatActivity {
                     boolean vemail = email_validation(email);
                     boolean vphone = phone_validation(phone);
                     boolean vpassword = password_validation(password);
+                    boolean minpassword = minpassword(password);
                     if (vemail!=true)
                     {
-                        Toast.makeText(Signup_Activity.this, "invalid email", Toast.LENGTH_SHORT).show();
+                        email_et.setError("Invalid Email");
+
                     }
 
                     else if (vphone!=true)
                     {
-                        Toast.makeText(Signup_Activity.this, "invalid phone no", Toast.LENGTH_SHORT).show();
+                        phone_et.setError("Invalid Phone no.");
+
                     }
 
                     else if (vpassword!=true)
                     {
-                        Toast.makeText(Signup_Activity.this, "invalid password", Toast.LENGTH_SHORT).show();
+                        password_et.setError("Invalid password");
+
                     }
 
                     else {
@@ -79,7 +88,8 @@ public class Signup_Activity extends AppCompatActivity {
 
                         }
                         else {
-                            Toast.makeText(Signup_Activity.this, "fail to signup", Toast.LENGTH_SHORT).show();
+                            email_et.setError("Email already exists");
+
                         }
                     }
                 }
@@ -159,6 +169,17 @@ public class Signup_Activity extends AppCompatActivity {
        else {
            return true;
        }
+    }
+
+    boolean minpassword(String password)
+    {
+        if (password.length()>8)
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }
 

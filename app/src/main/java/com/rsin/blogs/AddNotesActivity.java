@@ -21,6 +21,8 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,7 +35,7 @@ public class AddNotesActivity extends AppCompatActivity {
     Button add_images,savenotes_btn;
     int PICK_IMAGE_MULTIPLE = 1;
     String imageEncoded;
-    EditText title_et,dis_et;
+    TextInputLayout title_et,dis_et;
     List<Bitmap> imagesEncodedList;
     private static final int CAMERA_PERMISSION_CODE = 100;
     private static final int STORAGE_PERMISSION_CODE = 101;
@@ -64,8 +66,8 @@ public class AddNotesActivity extends AppCompatActivity {
         savenotes_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                title = title_et.getText().toString();
-                description = dis_et.getText().toString();
+                title = title_et.getEditText().getText().toString();
+                description = dis_et.getEditText().getText().toString();
                 if (title.isEmpty()&&description.isEmpty())
                 {
                     Toast.makeText(AddNotesActivity.this, "enter title/description", Toast.LENGTH_SHORT).show();
@@ -94,7 +96,7 @@ public class AddNotesActivity extends AppCompatActivity {
                             if (data == true)
                             {
                                 //data inserted
-                                Toast.makeText(AddNotesActivity.this, "text data inserted", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AddNotesActivity.this, "Note Added Successfully", Toast.LENGTH_SHORT).show();
                                 for (int i = 0; i<imagesEncodedList.size();i++)
                                 {
 
@@ -109,7 +111,7 @@ public class AddNotesActivity extends AppCompatActivity {
 
                                     }
                                     else {
-                                        Toast.makeText(AddNotesActivity.this, "image fail ", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(AddNotesActivity.this, "Something wrong ", Toast.LENGTH_SHORT).show();
                                     }
                                 }
 
@@ -117,7 +119,7 @@ public class AddNotesActivity extends AppCompatActivity {
 
                             else {
                                 //something wrong
-                                Toast.makeText(AddNotesActivity.this, "data failed", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AddNotesActivity.this, "failed to save Note", Toast.LENGTH_SHORT).show();
                             }
 
 
